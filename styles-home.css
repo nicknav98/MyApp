@@ -1,0 +1,153 @@
+ /* UTILITIES */
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+ }
+ body {
+  font-family: sans-serif;
+ }
+ a {
+  text-decoration: none;
+ }
+
+ .header{
+     margin-top: 40px;
+     margin-bottom: 40px;
+     text-align: center;
+ }
+
+ h2{
+
+  text-align: center;
+  font-size: 52px;
+  margin-top: 60px;
+  margin-bottom: 60px;
+
+ }
+
+ .navBar {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding: 20px;
+ background-color: darksalmon;
+ color: #fff;
+}
+
+.navLinks a {
+ color: white;
+}
+
+.menu{
+  display: flex;
+  gap: 2em;
+ font-size: 16px;
+}
+
+
+.menu li:hover {
+ background-color: #4c9e9e;
+ border-radius: 5px;
+ transition: 0.3s ease;
+}
+.menu li {
+ padding: 5px 14px;
+}
+
+.Socials {
+ position: relative;
+}
+
+.dropDown {
+ background-color: rgb(1, 139, 139);
+ padding: 1em 0;
+ position: absolute;
+ display:none;
+ border-radius: 10px;
+ top: 20px;
+ }
+
+.dropDown li + li {
+ margin-top: 10px;
+}
+
+.dropDown li:hover{
+ background-color: burlywood;
+}
+
+.Socials:hover .dropDown{
+ display: block;
+}
+
+/* Mobile Devices */
+
+ /*RESPONSIVE NAVBAR MENU STARTS*/
+ /* CHECKBOX HACK */
+
+input[type=checkbox]{
+ display: none;
+}
+
+.hamburger {
+ display: none;
+ font-size: 24px;
+ user-select: none;
+}
+
+@media (max-width: 768px) {
+.menu {
+ display: none;
+ position: absolute;
+ background-color: salmon;
+ right: 0;
+ left: 0;
+ text-align: center;
+ padding: 16px 0;
+}}
+
+ .container{
+
+  text-align: center;
+
+ }
+
+ .signUpSuccess{
+  text-align: center;
+  margin-top: 20px;
+  display: none;
+ }
+
+
+ .main{
+  padding:20px;
+  font-family: 'Helvetica', serif;
+  box-shadow: 5px 5px 7px 5px #888888;
+
+ }
+ .main h1{
+  font-size: 40px;
+  text-align:center;
+  font-family: 'Helvetica', serif;
+
+ }
+ input{
+  font-family: 'Helvetica', serif;
+  width: 100%;
+  font-size: 20px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: none;
+  border-bottom: 2px solid #767474;
+ }
+ input[type=submit] {
+  font-family: 'Helvetica', serif;
+  width: 100%;
+  background-color: #767474;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  margin: 4px 2px;
+  border-radius: 10px;
+ }
+ 
