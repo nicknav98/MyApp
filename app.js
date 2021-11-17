@@ -9,9 +9,9 @@ const uri = 'mongodb+srv://dbAdmin:SuperUser69@cluster0.yu7vn.mongodb.net/myAppD
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
-
-
 app.use('/public', express.static(__dirname + '/public'));
+app.use('/private', express.static(__dirname + '/private'));
+
 
 mongoose.connect(uri, { useNewUrlParser: true }, {useUnifiedTopology: true })
 
@@ -33,26 +33,26 @@ app.get('/index', function(req, res) {
 })
 
 
-app.get("/private/profile", isLoggedIn, function (req, res) {
+app.get("/profile", isLoggedIn, function (req, res) {
     res.render("profile");
 });
 
-//Handling user login
+/*Handling user login
 app.post("/signupPage", passport.authenticate("local", {
-    successRedirect: "/private/profile",
+    successRedirect: "/profile",
     failureRedirect: "/signUpPage"
 }), function (req, res) {
-});
+});*/
 
 //Handling user logout
-app.get("/public/index", function (req, res) {
+app.get("/index", function (req, res) {
     req.logout();
     res.redirect("/index");
 });
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) return next();
-    res.redirect("/signupPage");
+    res.redirect("/index");
 }
 
 app.post("/", function(req, res) {
@@ -62,7 +62,8 @@ app.post("/", function(req, res) {
         pass: req.body.pass
     });
     newUser.save();
-    res.redirect('/');
+    res.redirect("/signupPage")
+    res.end();
 
 })
 
