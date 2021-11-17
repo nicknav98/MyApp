@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyApp's Login</title>
+    <meta name="author" content="nicknav98">
+    <meta name="description" content="Login Page">
+    <meta name="viewport" content="width-device=width, initial-scale=1">
+    <link rel="stylesheet" href="/public/styles-home.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+
+<div class="header">
+    MyApp - Socialising made simple.
+</div>
+
+
+<nav class="navBar">
+    <ul class="navLinks">
+        <input type="checkbox" id="checkbox_toggle" />
+        <label for="checkbox_toggle" class="hamburger">&#9776;</label>
+        <div class="menu">
+            <li><a href="/public/index.html">Home</a></li>
+            <li><a href="/">What's MyApp?</a></li>
+            <li class="Socials">
+                <a href="/">Contact Me</a>
+                <ul class="dropDown">
+                    <li><a ref="/">LinkedIn</a></li>
+                    <li><a ref="/">GitHub</a></li>
+                </ul>
+            </li>
+        </div>
+    </ul>
+</nav>
+
+
+<h2>Express yourself, freely.</h2>
+
+
+<div id="signUpPortal">
+
+    <div class>
+        <div class="row">
+            <div class="col-md-3">
+
+            </div>
+
+            <div class="col-md-6">
+
+                <form action="/" method="post">
+
+                    <h1> Signup form </h1>
+
+                    <input class="box" type="text" name="name" id="name"
+                           placeholder="Name"  required /><br>
+
+                    <input class="box" type="email" name="email" id="email"
+                           placeholder="E-Mail " required /><br>
+
+                    <input class="box" type="password" name="pass"
+                           id="password" placeholder="Password " required/><br>
+                    <br>
+                    <input type="submit" id="submitDetails"
+                           name="submitDetails" value="Submit" />
+                    <br>
+
+                </form>
+
+            </div>
+
+
+            <div class="col-md-3">
+            </div>
+
+        </div>
+    </div>
+
+<div id="loginPortal">
+    <h2>Already have an account?</h2>
+    <form action="/login" method="POST">
+        <input type="text" name="username"
+               placeholder="username">
+        <input type="password" name="password"
+               placeholder="password">
+        <button>login</button>
+    </form>
+
+</div>
+
+
+</div>
+
+
+
+
+
+</body>
+</html>

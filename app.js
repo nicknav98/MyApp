@@ -1,54 +1,72 @@
 //Require assets
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
-let port = 3000;
+const bodyParser = require("body-parser");
+const passport = require("passport");
+//const req = require("express/lib/request");
+const app = express();
+const uri = 'mongodb+srv://dbAdmin:SuperUser69@cluster0.yu7vn.mongodb.net/myAppDB';
 
-const MongoClient = require('mongodb').MongoClient;
-const uri = 'mongodb+srv://dbAdmin:SuperUser@cluster0.yu7vn.mongodb.net/myApp?retryWrites=true&w=majority';
-const client = new MongoClient(uri, { useNewUrlParser: true });
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static(__dirname + '/public'));
 
-client.connect(err => {
-    const collection = client.db('myApp').collection('users');
-    // perform actions on the collection object
-    client.close();
-});
 
-mongoose.Promise = global.Promise;
+app.use('/public', express.static(__dirname + '/public'));
 
-var userSchema = mongoose.Schema({
+mongoose.connect(uri, { useNewUrlParser: true }, {useUnifiedTopology: true })
+
+const userSchema = {
     name: String,
     email: String,
     pass: String
+}
+
+const User = mongoose.model('User', userSchema);
+
+app.get("/signupPage", function(req,res){
+        res.render('signupPage', { });
+
 })
 
-var userDataS = mongoose.model('User', userSchema);
+app.get('/index', function(req, res) {
+    res.render('index', { });
+})
 
-//Load index page using endpoint
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/loginPage.html');
+
+app.get("/private/profile", isLoggedIn, function (req, res) {
+    res.render("profile");
 });
 
-//Post using endpoint
-app.post('/users', (req, res) => {
-    var userData = {
+//Handling user login
+app.post("/signupPage", passport.authenticate("local", {
+    successRedirect: "/private/profile",
+    failureRedirect: "/signUpPage"
+}), function (req, res) {
+});
+
+//Handling user logout
+app.get("/public/index", function (req, res) {
+    req.logout();
+    res.redirect("/index");
+});
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) return next();
+    res.redirect("/signupPage");
+}
+
+app.post("/", function(req, res) {
+    let newUser = new User({
         name: req.body.name,
         email: req.body.email,
         pass: req.body.pass
-    }
-    new userDataS(userData)
-        .save()
-        .then(result => { // note the use of a different variable name
-            res.send(result); // also, you generally want to send *something* down that lets the user know what was saved.  Maybe not the whole object, but this is illustrative and the client will at least need to know something (e.g. the id) to refer to the object by in the future.
-        })
-        .catch(err => {
-            res.status(400).send('unable to save to database');
-        });
-});
+    });
+    newUser.save();
+    res.redirect('/');
 
+})
 
-//Listen on port 3000
-app.listen(port, () => {
-    console.log('Server listening on port ' + port);
-});
+app.listen(3000, function() {
+    console.log("server is running on 3000");
+})
 
